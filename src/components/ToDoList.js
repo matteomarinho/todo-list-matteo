@@ -37,7 +37,7 @@ function TodoList() {
       >
         
       {todo.text}
-      <button onClick={() => handleDeleteTodo(todo.id)}>Delete</button>
+      <button onClick={() => handleDeleteTodo(todo.id)}>remove</button>
     </li>
   ))}
 </ul>
