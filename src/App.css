@@ -124,3 +124,6 @@ li .priority {
   font-size: 14px;
 }
 
+p .BigTitle {
+    font-weight: bold;
+}
