@@ -84,7 +84,6 @@ ul {
 
 li {
   display: flex;
-  justify-content: space-between;
   align-items: center;
   margin-bottom: 10px;
   padding: 10px;
@@ -127,3 +126,29 @@ li .priority {
 p .BigTitle {
     font-weight: bold;
 }
+
+.completed {
+  text-decoration: line-through; 
+  color: gray;
+}
+
+.buttondelete{
+  position: relative;
+  margin: 5px;
+  padding: 5px;
+  right: 0%;
+}
+
+.buttonEdit{
+  position: relative;
+  right: 0%;
+}
+
+span{
+  text-align: center;
+  padding-right: 1%;
+  padding-left: 1%;
+  width: 100%;
+}
+
+

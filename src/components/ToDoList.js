@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+//import "./components/App.css";
 
 const TodoList = () => {
   const [tasks, setTasks] = useState([]);
@@ -20,6 +21,7 @@ const TodoList = () => {
     event.preventDefault();
     if (newTask.trim()) {
       const task = {
+        checked: false,
         id: Date.now(),
         name: newTask,
         priority,
@@ -40,6 +42,13 @@ const TodoList = () => {
       task.id === id ? { ...task, name, priority } : task
     );
     setTasks(editedTasks);
+  };
+
+  const handleCheck = (id) => {
+    const checkedTasks = tasks.map((task) =>
+      task.id === id ? { ...task, checked: !task.checked } : task
+    );
+    setTasks(checkedTasks);
   };
 
   return (
@@ -66,10 +75,11 @@ const TodoList = () => {
       </form>
       <ul>
         {tasks.map((task) => (
-          <li key={task.id}>
-            {task.name} ({task.priority})
-            <button onClick={() => handleDelete(task.id)}>Delete</button>
-            <button onClick={() => handleEdit(task.id, prompt('Edit task name:', task.name), prompt('Edit priority:', task.priority))}>Edit</button>
+          <li key={task.id} >
+            <button className='buttonCheck' onClick={() => handleCheck(task.id)}>Done</button>
+            <span className={task.checked ? 'completed' : ''}>{task.name} ({task.priority})</span>
+            <button className='buttonEdit' onClick={() => handleEdit(task.id, prompt('Edit task name:', task.name), prompt('Edit priority:', task.priority))}>Edit</button>
+            <button className='buttondelete' onClick={() => handleDelete(task.id)}>Delete</button>
           </li>
         ))}
       </ul>
@@ -78,6 +88,4 @@ const TodoList = () => {
 };
 
 export default TodoList;
-
-
 
