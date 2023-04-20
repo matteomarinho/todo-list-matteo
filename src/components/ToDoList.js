@@ -1,17 +1,12 @@
 import React, { useState, useEffect } from 'react';
-//import "./components/App.css";
 
 const TodoList = () => {
-  const [tasks, setTasks] = useState([]);
+  const [tasks, setTasks] = useState(() => {
+    const storedTasks = JSON.parse(localStorage.getItem('tasks'));
+    return storedTasks ? storedTasks : [];
+  });
   const [newTask, setNewTask] = useState('');
   const [priority, setPriority] = useState('');
-
-  useEffect(() => {
-    const storedTasks = JSON.parse(localStorage.getItem('tasks'));
-    if (storedTasks) {
-      setTasks(storedTasks);
-    }
-  }, []);
 
   useEffect(() => {
     localStorage.setItem('tasks', JSON.stringify(tasks));
@@ -75,11 +70,28 @@ const TodoList = () => {
       </form>
       <ul>
         {tasks.map((task) => (
-          <li key={task.id} >
-            <button className='buttonCheck' onClick={() => handleCheck(task.id)}>Done</button>
-            <span className={task.checked ? 'completed' : ''}>{task.name} ({task.priority})</span>
-            <button className='buttonEdit' onClick={() => handleEdit(task.id, prompt('Edit task name:', task.name), prompt('Edit priority:', task.priority))}>Edit</button>
-            <button className='buttondelete' onClick={() => handleDelete(task.id)}>Delete</button>
+          <li key={task.id}>
+            <button className="buttonCheck" onClick={() => handleCheck(task.id)}>
+              Done
+            </button>
+            <span className={task.checked ? 'completed' : ''}>
+              {task.name} ({task.priority})
+            </span>
+            <button
+              className="buttonEdit"
+              onClick={() =>
+                handleEdit(
+                  task.id,
+                  prompt('Edit task name:', task.name),
+                  prompt('Edit priority:', task.priority)
+                )
+              }
+            >
+              Edit
+            </button>
+            <button className="buttondelete" onClick={() => handleDelete(task.id)}>
+              Delete
+            </button>
           </li>
         ))}
       </ul>
@@ -88,4 +100,3 @@ const TodoList = () => {
 };
 
 export default TodoList;
-
